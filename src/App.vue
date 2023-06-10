@@ -1,10 +1,10 @@
 <script setup>
-import hitLogo from "@/assets/hit-logo.jpeg";
 import { ref, computed } from "vue";
+import hitLogo from "@/assets/hit-logo.jpeg";
+import HITLogin from "./components/HitLogin.vue";
 
 const isLoggedIn = ref(false);
-const username = ref("Duo");
-
+const userLoggedIn = ref("");
 const clubName = ref("HIT");
 const clubGenerationNumber = ref(13);
 
@@ -45,7 +45,8 @@ const navigationLinks = [
   },
 ];
 
-const handleLogin = () => {
+const handleLogin = (username) => {
+  userLoggedIn.value = username;
   isLoggedIn.value = !isLoggedIn.value;
 };
 </script>
@@ -67,19 +68,14 @@ const handleLogin = () => {
       </div>
       <div v-if="isLoggedIn" class="user-info">
         <div class="avatar"></div>
-        <h3 class="name">{{ username }}</h3>
+        <h3 class="name">{{ userLoggedIn }}</h3>
       </div>
       <div v-else class="user-actions">
         <button type="button" class="login">Login</button>
       </div>
     </header>
     <main class="main-content">
-      <section class="login-section">
-        <h2 class="title">Login to {{ clubTitle }}</h2>
-        <button class="login-button" type="button" @click="handleLogin">
-          Login
-        </button>
-      </section>
+      <HITLogin :club-title="clubTitle" @login="handleLogin" />
     </main>
   </div>
 </template>
@@ -163,23 +159,5 @@ const handleLogin = () => {
 
 .home-page > .main-content {
   padding: 32px;
-}
-
-.home-page > .main-content > .login-section {
-  text-align: center;
-}
-
-.home-page > .main-content > .login-section > .title {
-  font-size: 30px;
-}
-
-.home-page > .main-content > .login-section > .login-button {
-  padding: 8px 16px;
-  cursor: pointer;
-  background-color: orange;
-  outline: none;
-  border: none;
-  transition: ease-in 0.5s;
-  border-radius: 8px;
 }
 </style>
