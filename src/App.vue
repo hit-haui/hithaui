@@ -1,9 +1,16 @@
 <script setup>
 import hitLogo from "@/assets/hit-logo.jpeg";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const isLoggedIn = ref(false);
 const username = ref("Duo");
+
+const clubName = ref("HIT");
+const clubGenerationNumber = ref(13);
+
+const clubTitle = computed(() => {
+  return `${clubName.value} ${clubGenerationNumber.value}`;
+});
 
 const navigationLinks = [
   {
@@ -47,7 +54,7 @@ const handleLogin = () => {
     <header class="header">
       <div class="brand">
         <img class="logo" :src="hitLogo" alt="HIT CLUB LOGO" />
-        <h1 class="title">HIT CLUB</h1>
+        <h1 class="title">{{ clubTitle }}</h1>
       </div>
       <div class="navigation-bar">
         <a
@@ -68,6 +75,7 @@ const handleLogin = () => {
     </header>
     <main class="main-content">
       <section class="login-section">
+        <h2 class="title">Login to {{ clubTitle }}</h2>
         <button class="login-button" type="button" @click="handleLogin">
           Login
         </button>
@@ -158,6 +166,11 @@ const handleLogin = () => {
 }
 
 .home-page > .main-content > .login-section {
+  text-align: center;
+}
+
+.home-page > .main-content > .login-section > .title {
+  font-size: 30px;
 }
 
 .home-page > .main-content > .login-section > .login-button {
