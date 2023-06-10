@@ -45,8 +45,8 @@ const navigationLinks = [
   },
 ];
 
-const handleLogin = (username) => {
-  userLoggedIn.value = username;
+const handleLogin = (userCredential) => {
+  userLoggedIn.value = userCredential.username;
   isLoggedIn.value = !isLoggedIn.value;
 };
 </script>
