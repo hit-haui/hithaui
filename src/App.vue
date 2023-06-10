@@ -37,6 +37,10 @@ const navigationLinks = [
     path: "olp",
   },
 ];
+
+const handleLogin = () => {
+  isLoggedIn.value = !isLoggedIn.value;
+};
 </script>
 <template>
   <div class="home-page">
@@ -62,6 +66,13 @@ const navigationLinks = [
         <button type="button" class="login">Login</button>
       </div>
     </header>
+    <main class="main-content">
+      <section class="login-section">
+        <button class="login-button" type="button" @click="handleLogin">
+          Login
+        </button>
+      </section>
+    </main>
   </div>
 </template>
 <style>
@@ -105,10 +116,12 @@ const navigationLinks = [
 }
 
 .home-page > .header > .user-info {
+  width: 15%;
   display: flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  justify-content: flex-end;
 }
 
 .home-page > .header > .user-info > .avatar {
@@ -119,8 +132,10 @@ const navigationLinks = [
 }
 
 .home-page > .header > .user-actions {
+  width: 15%;
   display: flex;
   align-items: center;
+  justify-content: end;
   gap: 8px;
 }
 
@@ -136,5 +151,22 @@ const navigationLinks = [
 
 .home-page > .header > .user-actions > .login:hover {
   background-color: rgb(247, 198, 106);
+}
+
+.home-page > .main-content {
+  padding: 32px;
+}
+
+.home-page > .main-content > .login-section {
+}
+
+.home-page > .main-content > .login-section > .login-button {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: orange;
+  outline: none;
+  border: none;
+  transition: ease-in 0.5s;
+  border-radius: 8px;
 }
 </style>
