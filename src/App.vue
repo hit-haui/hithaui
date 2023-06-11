@@ -1,6 +1,6 @@
 <script setup>
 import hitLogo from './assets/hit-logo.jpeg'
-import { ref } from 'vue'
+import { ref, computed, reactive } from 'vue'
 
 const isLoggedIn = ref(true)
 const handleLogin = () => {
@@ -39,6 +39,15 @@ const navigationLinks = [
     path: '/'
   }
 ]
+
+const authUser = reactive({
+  name: 'Dương',
+  nickName: 'duo'
+})
+
+const username = computed(() => {
+  return `${authUser.name} (${authUser.nickName})`
+})
 </script>
 
 <template>
@@ -55,7 +64,7 @@ const navigationLinks = [
       </div>
       <div v-if="isLoggedIn" class="user-info">
         <div class="avatar"></div>
-        <h4 class="username">Duo</h4>
+        <h4 class="username">{{ username }}</h4>
       </div>
       <div v-else class="user-actions">
         <button type="button" class="login-button">Login</button>
@@ -123,7 +132,7 @@ const navigationLinks = [
   gap: 8px;
   align-items: center;
   justify-content: flex-end;
-  width: 10%;
+  width: 20%;
 }
 
 .app-component > .header > .user-info > .avatar {
