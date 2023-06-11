@@ -5,9 +5,10 @@ import HITLogin from './components/HITLogin.vue'
 
 const generationNumber = ref(13)
 
-const isLoggedIn = ref(true)
-const handleLogin = () => {
-  isLoggedIn.value = !isLoggedIn.value
+const isLoggedIn = ref(false)
+const loginUser = (userCredential) => {
+  isLoggedIn.value = true
+  authUser.name = userCredential.username
 }
 
 const navigationLinks = [
@@ -74,7 +75,7 @@ const username = computed(() => {
       </div>
     </header>
     <main class="main-content">
-      <HITLogin :generation-number="generationNumber" @login="handleLogin" />
+      <HITLogin :generation-number="generationNumber" @login="loginUser" />
     </main>
   </div>
 </template>
