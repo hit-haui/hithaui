@@ -22,3 +22,7 @@ npm init vue@latest
 - v-else-if
 - v-else
 - v-show
+
+# list rendering
+
+- v-for

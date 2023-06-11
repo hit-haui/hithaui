@@ -2,6 +2,39 @@
 import hitLogo from './assets/hit-logo.jpeg'
 
 const isLoggedIn = true
+
+const navigationLinks = [
+  {
+    id: 1,
+    name: 'Home',
+    path: '/'
+  },
+  {
+    id: 2,
+    name: 'About',
+    path: '/'
+  },
+  {
+    id: 3,
+    name: 'Blog',
+    path: '/'
+  },
+  {
+    id: 4,
+    name: 'Courses',
+    path: '/'
+  },
+  {
+    id: 5,
+    name: 'Contests',
+    path: '/'
+  },
+  {
+    id: 6,
+    name: 'Contact',
+    path: '/'
+  }
+]
 </script>
 
 <template>
@@ -10,6 +43,11 @@ const isLoggedIn = true
       <div class="brand">
         <img class="logo" :src="hitLogo" alt="HIT CLUB LOGO 13" />
         <h1 class="title">HIT</h1>
+      </div>
+      <div class="navigation-bar">
+        <a class="link" v-for="link in navigationLinks" :href="link.path" :key="link.id">
+          {{ link.name }}</a
+        >
       </div>
       <div v-if="isLoggedIn" class="user-info">
         <div class="avatar"></div>
@@ -26,14 +64,13 @@ const isLoggedIn = true
 .app-component > .header {
   padding: 0 32px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   border-bottom: 1px solid orange;
 }
 .app-component > .header > .brand {
   display: flex;
   align-items: center;
-  gap: 16px;
 }
 .app-component > .header > .brand > .logo {
   height: 50px;
@@ -46,6 +83,18 @@ const isLoggedIn = true
   text-align: center;
   color: orange;
   margin: 8px;
+}
+
+.app-component > .header > .navigation-bar {
+  flex-grow: 1;
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+.app-component > .header > .navigation-bar > .link {
+  text-decoration: none;
+  color: #333333;
+  font-weight: 600;
 }
 
 .app-component > .header > .user-actions {
