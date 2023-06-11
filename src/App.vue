@@ -1,7 +1,11 @@
 <script setup>
 import hitLogo from './assets/hit-logo.jpeg'
+import { ref } from 'vue'
 
-const isLoggedIn = true
+const isLoggedIn = ref(true)
+const handleLogin = () => {
+  isLoggedIn.value = !isLoggedIn.value
+}
 
 const navigationLinks = [
   {
@@ -57,6 +61,11 @@ const navigationLinks = [
         <button type="button" class="login-button">Login</button>
       </div>
     </header>
+    <main class="main-content">
+      <section class="login-section">
+        <button class="login-button" @click="handleLogin">Login</button>
+      </section>
+    </main>
   </div>
 </template>
 
@@ -122,5 +131,21 @@ const navigationLinks = [
   height: 50px;
   width: 50px;
   border-radius: 50%;
+}
+
+.app-component > .main-content {
+  padding: 32px;
+}
+
+.app-component > .main-content > .login-section {
+  text-align: center;
+}
+
+.app-component > .main-content > .login-section > .login-button {
+  background-color: orange;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
 }
 </style>

@@ -26,3 +26,9 @@ npm init vue@latest
 # list rendering
 
 - v-for
+
+# handling event
+
+- v-on short for @
+- create reactive vars => ref()
+- modify reactive vars => .value
