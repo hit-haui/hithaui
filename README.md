@@ -32,3 +32,8 @@ npm init vue@latest
 - v-on short for @
 - create reactive vars => ref()
 - modify reactive vars => .value
+
+# events communication
+
+- access state outside component => props
+- emit event from child => parent

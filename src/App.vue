@@ -1,6 +1,9 @@
 <script setup>
 import hitLogo from './assets/hit-logo.jpeg'
 import { ref, computed, reactive } from 'vue'
+import HITLogin from './components/HITLogin.vue'
+
+const generationNumber = ref(13)
 
 const isLoggedIn = ref(true)
 const handleLogin = () => {
@@ -71,9 +74,7 @@ const username = computed(() => {
       </div>
     </header>
     <main class="main-content">
-      <section class="login-section">
-        <button class="login-button" @click="handleLogin">Login</button>
-      </section>
+      <HITLogin :generation-number="generationNumber" @login="handleLogin" />
     </main>
   </div>
 </template>
@@ -144,17 +145,5 @@ const username = computed(() => {
 
 .app-component > .main-content {
   padding: 32px;
-}
-
-.app-component > .main-content > .login-section {
-  text-align: center;
-}
-
-.app-component > .main-content > .login-section > .login-button {
-  background-color: orange;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  color: #ffffff;
 }
 </style>
