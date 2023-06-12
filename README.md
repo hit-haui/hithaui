@@ -12,3 +12,9 @@
 - bind an attribute: v-bind:src
 - :src for short
 
+# conditional rendering
+
+- v-if
+- v-else-if
+- v-else
+- v-show: only toggles the display CSS property of the element

@@ -1,5 +1,8 @@
 <script setup>
 import hitLogo from './assets/hit-logo.jpg'
+import avatarLogo from './assets/avatar.jpg'
+
+const isLoggedIn = true
 </script>
 
 <template>
@@ -9,6 +12,16 @@ import hitLogo from './assets/hit-logo.jpg'
         <img :src="hitLogo" alt="" class="logo">
         <h1 class="title">HIT CLUB </h1>
       </div>
+
+      <div v-if="isLoggedIn" class="user-info">
+        <img :src="avatarLogo" alt="" class="avatar">
+        <h4 class="username">Dung Nguyen</h4>
+      </div>
+
+      <div v-else class="user-actions">
+        <button type="button" class="login-button">Login</button>
+      </div>
+
     </header>
   </div>
 </template>
@@ -39,6 +52,20 @@ import hitLogo from './assets/hit-logo.jpg'
   font-weight: 600;
   text-align: center;
   color: orange;
+}
+
+.app-component>.header>.user-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-component>.header>.user-info>.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #cccccc;
 }
 </style>
 
