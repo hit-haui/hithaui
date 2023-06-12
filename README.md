@@ -18,3 +18,7 @@
 - v-else-if
 - v-else
 - v-show: only toggles the display CSS property of the element
+
+# list rendering
+
+- v-for

@@ -2,6 +2,39 @@
 import hitLogo from './assets/hit-logo.jpg'
 import avatarLogo from './assets/avatar.jpg'
 
+const navigationLinks = [
+  {
+    id: 1,
+    path: '/',
+    name: 'Home',
+  },
+  {
+    id: 2,
+    path: '/about',
+    name: 'About',
+  },
+  {
+    id: 3,
+    path: '/blog',
+    name: 'Blog',
+  },
+  {
+    id: 4,
+    path: '/course',
+    name: 'Course',
+  },
+  {
+    id: 5,
+    path: '/contest',
+    name: 'Contest',
+  },
+  {
+    id: 6,
+    path: '/contact',
+    name: 'Contact',
+  }
+]
+
 const isLoggedIn = true
 </script>
 
@@ -11,6 +44,10 @@ const isLoggedIn = true
       <div class="brand">
         <img :src="hitLogo" alt="" class="logo">
         <h1 class="title">HIT CLUB </h1>
+      </div>
+
+      <div class="nav-bar">
+        <a class="link" v-for="link in navigationLinks" :href="link.path">{{ link.name }}</a>
       </div>
 
       <div v-if="isLoggedIn" class="user-info">
@@ -32,6 +69,7 @@ const isLoggedIn = true
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid orange;
+  align-items: center;
 }
 
 .app-component>.header>.brand {
@@ -66,6 +104,18 @@ const isLoggedIn = true
   height: 40px;
   border-radius: 50%;
   border: 1px solid #cccccc;
+}
+
+.app-component>.header>.nav-bar {
+  display: inline-block;
+}
+
+.app-component>.header>.nav-bar>.link {
+  text-decoration: none;
+  padding: 8px 16px;
+  color: orange;
+  font-size: 16px;
+  font-weight: 600;
 }
 </style>
 
