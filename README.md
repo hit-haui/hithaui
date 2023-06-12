@@ -6,3 +6,9 @@
     npm init vue@latest
     ...
 ```
+
+# attribute binding
+
+- bind an attribute: v-bind:src
+- :src for short
+
