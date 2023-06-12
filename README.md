@@ -22,3 +22,9 @@
 # list rendering
 
 - v-for
+
+# event handling
+
+- v-on short for @
+- create reactive vars => ref()
+- modify reactive vars => .value

@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import hitLogo from './assets/hit-logo.jpg'
 import avatarLogo from './assets/avatar.jpg'
 
@@ -35,7 +36,9 @@ const navigationLinks = [
   }
 ]
 
-const isLoggedIn = true
+const isLoggedIn = ref(true)
+const handleLogin = () => isLoggedIn.value = !isLoggedIn.value
+
 </script>
 
 <template>
@@ -60,6 +63,12 @@ const isLoggedIn = true
       </div>
 
     </header>
+
+    <div class="main">
+      <section class="login-section">
+        <button class="login-button" @click="handleLogin">Login</button>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -97,7 +106,22 @@ const isLoggedIn = true
   justify-content: center;
   align-items: center;
   gap: 8px;
+  min-width: 150px;
 }
+
+.app-component>.header>.user-actions {
+  min-width: 150px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.app-component>.header>.user-actions>.login-button {
+  background-color: orange;
+  border: 1px solid #cccccc;
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
 
 .app-component>.header>.user-info>.avatar {
   width: 40px;
@@ -116,6 +140,20 @@ const isLoggedIn = true
   color: orange;
   font-size: 16px;
   font-weight: 600;
+}
+
+.app-component>.main>.login-section {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-component>.main>.login-section>.login-button {
+  background-color: orange;
+  border: 1px solid #cccccc;
+  padding: 8px 16px;
+  border-radius: 5px;
 }
 </style>
 
