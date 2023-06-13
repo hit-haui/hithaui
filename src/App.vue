@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import hitLogo from './assets/hit-logo.jpg'
 import avatarLogo from './assets/avatar.jpg'
+import { computed } from '@vue/reactivity';
 
 const navigationLinks = [
   {
@@ -39,6 +40,13 @@ const navigationLinks = [
 const isLoggedIn = ref(true)
 const handleLogin = () => isLoggedIn.value = !isLoggedIn.value
 
+const authUser = reactive({
+  username: 'Dung Nguyen',
+  nickname: 'vandungday'
+})
+
+const username = computed(() => `${authUser.username} (${authUser.nickname})`)
+
 </script>
 
 <template>
@@ -55,7 +63,7 @@ const handleLogin = () => isLoggedIn.value = !isLoggedIn.value
 
       <div v-if="isLoggedIn" class="user-info">
         <img :src="avatarLogo" alt="" class="avatar">
-        <h4 class="username">Dung Nguyen</h4>
+        <h4 class="username">{{ username }}</h4>
       </div>
 
       <div v-else class="user-actions">
@@ -66,6 +74,9 @@ const handleLogin = () => isLoggedIn.value = !isLoggedIn.value
 
     <div class="main">
       <section class="login-section">
+        <form>
+
+        </form>
         <button class="login-button" @click="handleLogin">Login</button>
       </section>
     </div>
