@@ -1,8 +1,9 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
+import HITLogin from './components/HITLogin.vue';
 import hitLogo from './assets/hit-logo.jpg'
 import avatarLogo from './assets/avatar.jpg'
-import { computed } from '@vue/reactivity';
+
 
 const navigationLinks = [
   {
@@ -47,6 +48,8 @@ const authUser = reactive({
 
 const username = computed(() => `${authUser.username} (${authUser.nickname})`)
 
+const initNumber = ref(13)
+
 </script>
 
 <template>
@@ -73,12 +76,7 @@ const username = computed(() => `${authUser.username} (${authUser.nickname})`)
     </header>
 
     <div class="main">
-      <section class="login-section">
-        <form>
-
-        </form>
-        <button class="login-button" @click="handleLogin">Login</button>
-      </section>
+      <HITLogin :init-number="initNumber" @login="handleLogin" />
     </div>
   </div>
 </template>
@@ -151,20 +149,6 @@ const username = computed(() => `${authUser.username} (${authUser.nickname})`)
   color: orange;
   font-size: 16px;
   font-weight: 600;
-}
-
-.app-component>.main>.login-section {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.app-component>.main>.login-section>.login-button {
-  background-color: orange;
-  border: 1px solid #cccccc;
-  padding: 8px 16px;
-  border-radius: 5px;
 }
 </style>
 
