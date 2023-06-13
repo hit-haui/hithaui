@@ -38,18 +38,21 @@ const navigationLinks = [
   }
 ]
 
-const isLoggedIn = ref(true)
-const handleLogin = () => isLoggedIn.value = !isLoggedIn.value
-
 const authUser = reactive({
   username: 'Dung Nguyen',
   nickname: 'vandungday'
 })
 
+const isLoggedIn = ref(false)
+const loginUser = (userInfo) => {
+  console.log(userInfo);
+  isLoggedIn.value = true
+  authUser.username = userInfo.username
+}
+
 const username = computed(() => `${authUser.username} (${authUser.nickname})`)
 
 const initNumber = ref(13)
-
 </script>
 
 <template>
@@ -76,7 +79,7 @@ const initNumber = ref(13)
     </header>
 
     <div class="main">
-      <HITLogin :init-number="initNumber" @login="handleLogin" />
+      <HITLogin :init-number="initNumber" @login="loginUser" />
     </div>
   </div>
 </template>
