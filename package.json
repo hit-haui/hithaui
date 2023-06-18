@@ -10,6 +10,11 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
+    "ohmyfetch": "^0.4.21",
+    "pinia": "^2.1.4"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.5",
     "@nuxt/devtools": "latest",
@@ -21,14 +26,10 @@
     "nuxt-icon": "^0.4.1",
     "sass": "^1.63.4"
   },
-  "lint-staged": {
-    "*.{ts,vue}": "npm run lint:fix"
-  },
   "overrides": {
     "vue": "latest"
   },
-  "dependencies": {
-    "@pinia/nuxt": "^0.4.11",
-    "pinia": "^2.1.4"
+  "lint-staged": {
+    "*.{ts,vue}": "npm run lint:fix"
   }
 }
