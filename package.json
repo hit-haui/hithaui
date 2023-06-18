@@ -23,5 +23,12 @@
   },
   "lint-staged": {
     "*.{ts,vue}": "npm run lint:fix"
+  },
+  "overrides": {
+    "vue": "latest"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
+    "pinia": "^2.1.4"
   }
 }
