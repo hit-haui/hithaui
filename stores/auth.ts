@@ -1,6 +1,8 @@
 import { $fetch } from 'ohmyfetch'
 
 export const useAuthStore = defineStore('auth', () => {
+  const user = ref()
+
   const login = async (userCredentials: any) => {
     const response = await $fetch('http://localhost:8000/api/v1/auth/sign-in', {
       method: 'POST',
@@ -13,5 +15,19 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  return { login }
+  const getUser = async () => {
+    const authUser = await $fetch('http://localhost:8000/api/v1/auth/me', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    })
+
+    user.value = authUser
+  }
+
+  const username = computed(() => {
+    return user.value.email.split('@')[0]
+  })
+
+  return { login, getUser, user, username }
 })
