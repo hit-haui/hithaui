@@ -6,10 +6,8 @@ definePageMeta({
 
 <template>
   <div>
-    Dashboard
+    <NuxtPage />
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
