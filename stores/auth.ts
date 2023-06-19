@@ -1,10 +1,9 @@
-import { $fetch } from 'ohmyfetch'
-
 export const useAuthStore = defineStore('auth', () => {
+  const { $api } = useNuxtApp()
   const user = ref()
 
   const login = async (userCredentials: any) => {
-    const response = await $fetch('http://localhost:8000/api/v1/auth/sign-in', {
+    const response = await $api('/api/v1/auth/sign-in', {
       method: 'POST',
       body: userCredentials,
     })
@@ -16,7 +15,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const getUser = async () => {
-    const authUser = await $fetch('http://localhost:8000/api/v1/auth/me', {
+    const authUser = await $api('/api/v1/auth/me', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
