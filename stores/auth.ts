@@ -25,7 +25,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const username = computed(() => {
-    return user.value.email.split('@')[0]
+    return user.value?.email?.split('@')[0]
   })
 
   return { login, getUser, user, username }
