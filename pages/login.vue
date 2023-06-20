@@ -12,7 +12,14 @@ const userCredentials = reactive({
   password: '',
 })
 
+const isInvalidLoginForm = computed(
+  () => !userCredentials.email || !userCredentials.password,
+)
+
 async function handleLogin() {
+  if (isInvalidLoginForm.value)
+    return
+
   await authStore.login(userCredentials)
 }
 </script>
@@ -21,19 +28,31 @@ async function handleLogin() {
   <div class="login-page">
     <form class="login-form">
       <h2 class="title">
-        Đăng nhập
+        Login to HIT CLUB
       </h2>
       <div class="form-item">
-        <label for="email" class="label">Email:</label>
-        <input id="email" v-model="userCredentials.email" type="text" placeholder="Email" class="input">
+        <label for="email" class="label">Email</label>
+        <input
+          id="email"
+          v-model="userCredentials.email"
+          type="text"
+          placeholder="Email"
+          class="input"
+        >
       </div>
       <div class="form-item">
-        <label for="password" class="label">Password:</label>
-        <input id="password" v-model="userCredentials.password" type="password" placeholder="Password" class="input">
+        <label for="password" class="label">Password</label>
+        <input
+          id="password"
+          v-model="userCredentials.password"
+          type="password"
+          placeholder="Password"
+          class="input"
+        >
       </div>
-      <button type="button" class="login-button" @click="handleLogin">
-        Đăng nhập
-      </button>
+      <AppButton class="login-button" block @click="handleLogin">
+        Login
+      </AppButton>
     </form>
   </div>
 </template>
@@ -45,65 +64,47 @@ async function handleLogin() {
   display: flex;
   justify-content: center;
   align-items: center;
-  mix-blend-mode: normal;
 
   .login-form {
     position: relative;
-    width: 560px;
-    height: 660px;
-    background: #FFFFFF;
-    border-radius: 50px;
+    background: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 16px;
   }
 
-  .login-form>.logo {
+  .login-form > .logo {
     position: absolute;
     top: -3%;
     left: -1%;
   }
 
-  .login-form>.title {
+  .login-form > .title {
     font-weight: 700;
     font-size: 36px;
-    color: #303030;
+    color: $primary-color;
     margin-bottom: 20px;
   }
 
-  .login-form>.form-item {
+  .login-form > .form-item {
     display: flex;
     flex-direction: column;
   }
 
-  .login-form>.form-item>.label {
-    font-size: 22px;
-    font-weight: 700;
+  .login-form > .form-item > .label {
+    font-size: 16px;
     margin-bottom: 5px;
   }
 
-  .login-form>.form-item>.input {
+  .login-form > .form-item > .input {
     width: 380px;
-    height: 54px;
-    background: #F5F5F5;
-    border-radius: 25px;
+    background: #f5f5f5;
+    border-radius: 4px;
     border: none;
     margin-bottom: 10px;
-    padding-left: 20px;
-  }
-
-  .login-form>.login-button {
-    margin-top: 20px;
-    width: 220px;
-    height: 64px;
-    background: $primary-color;
-    border-radius: 160px;
-    border: none;
-    font-weight: 700;
-    font-size: 24px;
-    color: #FFFFFF;
-    cursor: pointer;
+    padding: 16px;
   }
 }
 </style>
