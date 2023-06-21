@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/auth'
+import hit12Logo from '~/assets/images/hit12.jpeg'
 
 definePageMeta({
   layout: 'blank',
@@ -26,33 +27,23 @@ async function handleLogin() {
 
 <template>
   <div class="login-page">
-    <form class="login-form">
+    <img :src="hit12Logo" alt="" class="cover">
+    <form class="form">
       <h2 class="title">
-        Login to HIT CLUB
+        HIT CLUB
       </h2>
-      <div class="form-item">
-        <label for="email" class="label">Email</label>
-        <input
-          id="email"
-          v-model="userCredentials.email"
-          type="text"
-          placeholder="Email"
-          class="input"
-        >
-      </div>
-      <div class="form-item">
-        <label for="password" class="label">Password</label>
-        <input
-          id="password"
-          v-model="userCredentials.password"
-          type="password"
-          placeholder="Password"
-          class="input"
-        >
-      </div>
-      <AppButton class="login-button" block @click="handleLogin">
-        Login
-      </AppButton>
+      <AppInput
+        v-model="userCredentials.email"
+        placeholder="Email"
+        label="Email"
+      />
+      <AppInput
+        v-model="userCredentials.password"
+        placeholder="Password"
+        label="Password"
+        type="password"
+      />
+      <AppButton label="Login" block @click="handleLogin" />
     </form>
   </div>
 </template>
@@ -64,47 +55,27 @@ async function handleLogin() {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 5%;
 
-  .login-form {
-    position: relative;
+  > .cover {
+    width: 40%;
+  }
+
+  > .form {
     background: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 16px;
+    width: 30%;
   }
 
-  .login-form > .logo {
-    position: absolute;
-    top: -3%;
-    left: -1%;
-  }
-
-  .login-form > .title {
-    font-weight: 700;
+  .form > .title {
     font-size: 36px;
+    font-weight: bold;
     color: $primary-color;
     margin-bottom: 20px;
-  }
-
-  .login-form > .form-item {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .login-form > .form-item > .label {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-
-  .login-form > .form-item > .input {
-    width: 380px;
-    background: #f5f5f5;
-    border-radius: 4px;
-    border: none;
-    margin-bottom: 10px;
-    padding: 16px;
   }
 }
 </style>
