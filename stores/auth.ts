@@ -24,9 +24,14 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = authUser
   }
 
+  const logout = () => {
+    localStorage.removeItem('accessToken')
+    user.value = undefined
+  }
+
   const username = computed(() => {
     return user.value?.email?.split('@')[0]
   })
 
-  return { login, getUser, user, username }
+  return { login, getUser, logout, user, username }
 })
