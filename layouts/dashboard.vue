@@ -33,6 +33,11 @@ const routes = [
     iconColor: 'orange',
   },
 ]
+
+function handleLogout() {
+  authStore.logout()
+  navigateTo('/login')
+}
 </script>
 
 <template>
@@ -68,9 +73,19 @@ const routes = [
         </div>
         <div class="user-card">
           <div class="avatar" />
-          <h4 class="username">
-            {{ username }}
-          </h4>
+          <div class="user-info">
+            <h4 class="username">
+              {{ username }}
+            </h4>
+            <AppButton
+              size="sm"
+              class="logout"
+              variant="link"
+              @click="handleLogout"
+            >
+              Logout
+            </AppButton>
+          </div>
         </div>
       </header>
       <div class="content">
@@ -168,6 +183,18 @@ const routes = [
     height: 50px;
     border-radius: 50%;
     background-color: $primary-color;
+  }
+
+  > .main-content > .header > .user-card > .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  > .main-content > .header > .user-card > .user-info > .logout {
+    padding: 0;
   }
 
   > .main-content > .content {
