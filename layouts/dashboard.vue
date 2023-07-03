@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/auth'
 import HITLogo from '~/assets/images/logoHIT.png'
-import {useNotificationStore} from '~/stores/nofiStore'
-import {Notification} from '~/types'
+import { useNotificationStore } from '~/stores/nofiStore'
+import { Notification } from '~/types'
 const isSidebarExpanded = ref(true)
 function handleToggleSidebar() {
   isSidebarExpanded.value = !isSidebarExpanded.value
@@ -41,16 +41,7 @@ function handleLogout() {
 }
 
 const notificationStore = useNotificationStore()
-const {notifications} = storeToRefs(notificationStore)
-
-const handleAddNoti = () =>{
-    const notification:Notification = {
-      id: useUUID(),
-      message: "Login succes",
-      type: "Success"
-    }
-    notificationStore.addNotification(notification)
-}
+const { notifications } = storeToRefs(notificationStore)
 </script>
 
 <template>
@@ -87,8 +78,8 @@ const handleAddNoti = () =>{
         </div>
       </header>
       <div class="content">
-        <button @click="handleAddNoti">ADD</button>
-        <AppNotification  :key="noti.id"  v-for="noti in notifications" :id="noti.id" :message="noti.message"></AppNotification>
+        <AppNotification :key="noti.id" v-for="noti in notifications" :id="noti.id" :message="noti.message">
+        </AppNotification>
         <slot />
       </div>
       <footer class="footer">
@@ -109,6 +100,7 @@ const handleAddNoti = () =>{
   display: flex;
   width: 100%;
   position: relative;
+
   >.sidebar {
     height: 100vh;
     padding: 16px 32px;
@@ -213,8 +205,5 @@ const handleAddNoti = () =>{
     display: flex;
     gap: 8px;
   }
-
-  
-
 }
 </style>
