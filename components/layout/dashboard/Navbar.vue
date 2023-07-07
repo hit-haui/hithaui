@@ -1,0 +1,102 @@
+<script setup lang="ts">
+defineProps<{
+  user: any
+}>()
+
+const isShowUserDropdown = ref(false)
+const openUserDropdown = () => (isShowUserDropdown.value = true)
+const closeUserDropdown = () => (isShowUserDropdown.value = false)
+
+const userCardRef = ref()
+onClickOutside(userCardRef, closeUserDropdown)
+</script>
+
+<template>
+  <nav class="navbar">
+    <div class="content-wrapper">
+      <div class="brand">
+        <a href="https://hithaui.com" class="app-info">
+          <img
+            src="~/assets/images/logoHIT.png"
+            class="logo"
+            alt="HIT CLUB Logo"
+          >
+          <h1 class="title text-4xl">HIT CLUB</h1>
+        </a>
+      </div>
+      <div ref="userCardRef" class="user-card relative">
+        <button type="button" class="avatar-button" @click="openUserDropdown">
+          <img
+            class="w-10 h-10 rounded-full"
+            src="~/assets/images/hit12.jpeg"
+            alt="user photo"
+          >
+        </button>
+        <div v-if="isShowUserDropdown" class="dropdown-user">
+          <div class="info">
+            <span class="name">{{ user?.name }}</span>
+            <span class="email">{{ user?.email }}</span>
+          </div>
+          <ul class="menu">
+            <li class="menu-item">
+              <NuxtLink to="/login" class="sign-out" @click="$emit('logout')">
+                Sign out
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</template>
+
+<style lang="scss" scoped>
+.navbar {
+  @apply fixed top-0 z-50 w-full bg-white border-b border-gray-200;
+
+  > .content-wrapper {
+    @apply px-3 py-3 lg:px-4 lg:pl-3 flex items-center justify-between;
+
+    > .brand,
+    > .user-card {
+      @apply flex items-center relative;
+    }
+
+    > .brand > .app-info {
+      @apply flex justify-center items-center ml-2 md:mr-24;
+    }
+
+    > .brand > .app-info > .logo {
+      @apply h-8 mr-3;
+    }
+
+    > .brand > .app-info > .title {
+      @apply self-center text-xl font-extrabold sm:text-2xl whitespace-nowrap text-amber-500;
+    }
+
+    > .user-card > .body > .avatar-button {
+      @apply flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300;
+    }
+
+    > .user-card > .dropdown-user {
+      @apply absolute top-full right-[0%] z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow;
+    }
+
+    > .user-card > .dropdown-user > .info {
+      @apply px-4 py-3;
+    }
+
+    > .user-card > .dropdown-user > .info > .name {
+      @apply block text-sm text-gray-900;
+    }
+
+    > .user-card > .dropdown-user > .info > .email {
+      @apply text-sm font-medium text-gray-900 truncate;
+    }
+
+    > .user-card > .dropdown-user > .menu > .menu-item > .sign-out {
+      @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
+    }
+  }
+}
+</style>
