@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
-  modules: ['nuxt-icon', '@pinia/nuxt', '@nuxtjs/tailwindcss'],
+  modules: ['nuxt-icon', '@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt'],
   css: ['~/assets/scss/main.scss'],
   vite: {
     css: {
