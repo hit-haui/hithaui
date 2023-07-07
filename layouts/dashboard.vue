@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/auth'
 import HITLogo from '~/assets/images/logoHIT.png'
-import { useNotificationStore } from '~/stores/nofiStore'
+import { useNotificationStore } from '~/stores/notifications'
 import { Notification } from '~/types'
 const isSidebarExpanded = ref(true)
 function handleToggleSidebar() {
@@ -78,8 +78,6 @@ const { notifications } = storeToRefs(notificationStore)
         </div>
       </header>
       <div class="content">
-        <AppNotification :key="noti.id" v-for="noti in notifications" :id="noti.id" :message="noti.message">
-        </AppNotification>
         <slot />
       </div>
       <footer class="footer">

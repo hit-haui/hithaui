@@ -11,3 +11,4 @@ export const useNotificationStore = defineStore('notification', () => {
     }
     return { addNotification, removeNotification, notifications }
 })
+
