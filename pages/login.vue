@@ -32,50 +32,53 @@ async function handleLogin() {
       <h2 class="title">
         HIT CLUB
       </h2>
-      <AppInput
-        v-model="userCredentials.email"
-        placeholder="Email"
-        label="Email"
-      />
-      <AppInput
-        v-model="userCredentials.password"
-        placeholder="Password"
-        label="Password"
-        type="password"
-      />
-      <AppButton label="Login" block @click="handleLogin" />
+      <div class="form-item">
+        <label for="email" class="label">Username</label>
+        <input id="email" v-model="userCredentials.email" type="email" class="input">
+      </div>
+      <div class="form-item">
+        <label for="password" class="label">Password</label>
+        <input id="password" v-model="userCredentials.password" type="password" class="input">
+      </div>
+      <div class="form-item">
+        <button class="login-button" @click="handleLogin">
+          Submit
+        </button>
+      </div>
     </form>
   </div>
 </template>
 
 <style scoped lang="scss">
 .login-page {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5%;
+  @apply w-full min-h-[100vh] flex justify-center items-center gap-[5%];
 
   > .cover {
-    width: 40%;
+    @apply w-[40%]
   }
 
   > .form {
-    background: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    width: 30%;
+    @apply flex flex-col justify-center gap-4 w-[30%] bg-white
+  }
+
+  > .form > .form-item {
+    @apply mb-4
+  }
+
+  > .form > .form-item > .label {
+    @apply block mb-2 text-sm font-medium text-gray-900
+  }
+
+  > .form > .form-item > .input {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:outline-amber-500
+  }
+
+  > .form > .form-item > .login-button {
+    @apply text-white bg-amber-500 hover:bg-amber-600 focus:ring-4 focus:outline-none focus:ring-amber-100 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center
   }
 
   .form > .title {
-    font-size: 36px;
-    font-weight: bold;
-    color: $primary-color;
-    margin-bottom: 20px;
+    @apply text-amber-500 text-5xl font-bold text-center;
   }
 }
 </style>
