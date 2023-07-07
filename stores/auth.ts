@@ -1,6 +1,9 @@
 export const useAuthStore = defineStore('auth', () => {
   const { $api } = useNuxtApp()
-  const user = ref()
+  const user = ref<any>({
+    name: 'HITer',
+    email: 'hiter@gmail.com',
+  })
 
   const login = async (userCredentials: any) => {
     const response = await $api('/api/v1/auth/sign-in', {
@@ -29,9 +32,5 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = undefined
   }
 
-  const username = computed(() => {
-    return user.value?.email?.split('@')[0]
-  })
-
-  return { login, getUser, logout, user, username }
+  return { login, getUser, logout, user }
 })
