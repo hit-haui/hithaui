@@ -34,7 +34,7 @@ onClickOutside(userCardRef, closeUserDropdown)
         </button>
         <div v-if="isShowUserDropdown" class="dropdown-user">
           <div class="info">
-            <span class="name">{{ user?.name }}</span>
+            <span class="name">{{ user?.name || user?.studentCode }}</span>
             <span class="email">{{ user?.email }}</span>
           </div>
           <ul class="menu">

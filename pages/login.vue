@@ -9,12 +9,12 @@ definePageMeta({
 const authStore = useAuthStore()
 
 const userCredentials = reactive({
-  email: '',
+  username: '',
   password: '',
 })
 
 const isInvalidLoginForm = computed(
-  () => !userCredentials.email || !userCredentials.password,
+  () => !userCredentials.username || !userCredentials.password,
 )
 
 async function handleLogin() {
@@ -33,15 +33,15 @@ async function handleLogin() {
         HIT CLUB
       </h2>
       <div class="form-item">
-        <label for="email" class="label">Username</label>
-        <input id="email" v-model="userCredentials.email" type="email" class="input">
+        <label for="username" class="label">Username</label>
+        <input id="username" v-model="userCredentials.username" class="input">
       </div>
       <div class="form-item">
         <label for="password" class="label">Password</label>
         <input id="password" v-model="userCredentials.password" type="password" class="input">
       </div>
       <div class="form-item">
-        <button class="login-button" @click="handleLogin">
+        <button type="button" class="login-button" @click="handleLogin">
           Submit
         </button>
       </div>
