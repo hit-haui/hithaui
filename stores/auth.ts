@@ -28,7 +28,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   const logout = () => {
-    localStorage.removeItem('accessToken')
+    accessToken.value = ''
     user.value = undefined
   }
 
