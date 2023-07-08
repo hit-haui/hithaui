@@ -34,5 +34,5 @@ export const useAuthStore = defineStore('auth', () => {
 
   const isAuthenticated = computed(() => !!user.value || accessToken.value)
 
-  return { login, getUser, logout, user, isAuthenticated }
+  return { login, getUser, logout, user, isAuthenticated, accessToken }
 })
