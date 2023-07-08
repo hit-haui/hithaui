@@ -3,6 +3,7 @@ import type { LoginResponse, User, UserCredentials } from '~/types'
 export const useAuthStore = defineStore('auth', () => {
   const { $api } = useNuxtApp()
   const user = ref<User>()
+  const accessToken = useLocalStorage('accessToken', '')
 
   const login = async (userCredentials: UserCredentials) => {
     const response = await $api<LoginResponse>('/api/v1/auth/sign-in', {
@@ -11,7 +12,7 @@ export const useAuthStore = defineStore('auth', () => {
     })
 
     if (response) {
-      localStorage.setItem('accessToken', response.accessToken)
+      accessToken.value = response.accessToken
       return navigateTo('/dashboard')
     }
   }
@@ -19,7 +20,7 @@ export const useAuthStore = defineStore('auth', () => {
   const getUser = async () => {
     const authUser = await $api<User>('/api/v1/auth/me', {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        Authorization: `Bearer ${accessToken.value}`,
       },
     })
 
@@ -31,7 +32,7 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = undefined
   }
 
-  const isAuthenticated = computed(() => !!user.value)
+  const isAuthenticated = computed(() => !!user.value || accessToken.value)
 
   return { login, getUser, logout, user, isAuthenticated }
 })
