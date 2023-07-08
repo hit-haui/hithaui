@@ -1,62 +1,109 @@
+<script setup lang="ts">
+const currentRoute = useRoute()
+
+function isActiveRoute(routePath: string) {
+  return currentRoute.path === routePath
+}
+
+const routes = computed(() => [
+  {
+    path: '/dashboard',
+    label: 'Dashboard',
+    icon: 'uil:create-dashboard',
+  },
+  {
+    path: '/dashboard/users',
+    label: 'Users',
+    icon: 'uil:users-alt',
+  },
+  {
+    path: '/dashboard/documents',
+    label: 'Documents',
+    icon: 'uil:document-info',
+  },
+  {
+    path: '/dashboard/events',
+    label: 'Events',
+    icon: 'uil:caret-right',
+  },
+  {
+    path: '/dashboard/courses',
+    label: 'Courses',
+    icon: 'uil:book-medical',
+  },
+])
+
+const devRoutes = computed(() => [
+  {
+    path: '/dashboard/api',
+    label: 'Docs API',
+    icon: 'logos:swagger',
+  },
+  {
+    path: 'https://github.com/hit-haui/hithaui',
+    label: 'Frontend Repository',
+    icon: 'logos:nuxt-icon',
+    target: '_blank',
+  },
+  {
+    path: 'https://github.com/hit-haui/hithaui-api',
+    label: 'Backend Repository',
+    icon: 'logos:nestjs',
+    target: '_blank',
+  },
+  {
+    path: '/dashboard/contributors',
+    label: 'Contributors',
+    icon: 'logos:dev-icon',
+  },
+])
+</script>
+
 <template>
   <aside class="sidebar">
     <div class="content">
       <ul class="menu">
-        <li class="menu-item">
+        <li v-for="route in routes" :key="route.path" class="menu-item">
           <NuxtLink
-            to="/dashboard"
+            :to="route.path"
             class="link"
+            :class="{ '-active': isActiveRoute(route.path) }"
           >
-            <Icon
-              name="uil:create-dashboard"
-              class="icon"
-            />
-            <span class="ml-3">Dashboard</span>
-          </NuxtLink>
-        </li>
-        <li
-          class="menu-item"
-        >
-          <NuxtLink
-            to="/dashboard/users"
-            class="link"
-          >
-            <Icon
-              name="uil:user"
-              class="icon"
-            />
-            <span class="target">Users</span>
-          </NuxtLink>
-        </li>
-        <li
-          class="menu-item"
-        >
-          <NuxtLink
-            to="/dashboard/documents"
-            class="link"
-          >
-            <Icon
-              name="uil:document-info"
-              class="icon"
-            />
-            <span class="target">Documents</span>
-          </NuxtLink>
-        </li>
-        <li
-          class="menu-item"
-        >
-          <NuxtLink
-            to="/dashboard/events"
-            class="link"
-          >
-            <Icon
-              name="uil:caret-right"
-              class="icon"
-            />
-            <span class="target">Events</span>
+            <Icon :name="route.icon" class="icon" />
+            <span class="ml-3">{{ route.label }}</span>
           </NuxtLink>
         </li>
       </ul>
+      <ul class="menu -dev">
+        <li v-for="route in devRoutes" :key="route.path" class="menu-item">
+          <NuxtLink :to="route.path" class="link" :target="route.target">
+            <Icon :name="route.icon" class="icon" />
+            <span class="ml-4">{{ route.label }}</span>
+          </NuxtLink>
+        </li>
+      </ul>
+    </div>
+    <div
+      class="settings"
+    >
+      <a
+        href="#"
+        class="item"
+      >
+        <Icon name="uil:brightness" class="icon" />
+      </a>
+      <a
+        href="#"
+        class="item"
+      >
+        <Icon name="uil:setting" class="icon" />
+      </a>
+      <a
+        href="#"
+        class="item"
+      >
+        <Icon name="uil:language" class="icon" />
+      </a>
     </div>
   </aside>
 </template>
@@ -73,8 +120,16 @@
     @apply space-y-2 font-medium;
   }
 
+  > .content > .menu.-dev {
+    @apply pt-4 mt-4 border-t border-gray-200;
+  }
+
   > .content > .menu > .menu-item > .link {
     @apply flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100;
+  }
+
+  > .content > .menu > .menu-item > .link.-active {
+    @apply bg-gray-100;
   }
 
   > .content > .menu > .menu-item > .link > .icon {
@@ -82,7 +137,19 @@
   }
 
   > .content > .menu > .menu-item > .link > .target {
-    @apply flex-1 ml-3 whitespace-nowrap
+    @apply flex-1 ml-3 whitespace-nowrap;
+  }
+
+  > .settings {
+    @apply hidden absolute bottom-0 left-0 border-t border-gray-200 justify-center px-4 py-2 space-x-4 w-full lg:flex bg-white z-20;
+  }
+
+  > .settings > .item {
+    @apply inline-flex justify-center p-2 rounded text-orange-500 cursor-pointer hover:bg-gray-100
+  }
+
+  > .settings > .item > .icon {
+    @apply h-6 w-6
   }
 }
 </style>
