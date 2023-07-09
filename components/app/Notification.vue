@@ -18,10 +18,16 @@ const notificationStore = useNotificationStore()
 const handleRemoveNoti = () => {
     notificationStore.removeNotification(props.id)
 }
+
+
 onMounted(() => {
     setTimeout(() => {
         handleRemoveNoti();
     }, 3000);
+});
+
+onUnmounted(() => {
+    clearTimeout();
 });
 
 </script>
