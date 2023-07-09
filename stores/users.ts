@@ -18,5 +18,11 @@ export const useUsersStore = defineStore('users', () => {
     users.value = response
   }
 
-  return { users, fetchUsers }
+  const filterUsersByGeneration = (generation: number) => {
+    return users.value.filter(
+      user => user.generation === generation,
+    )
+  }
+
+  return { users, fetchUsers, filterUsersByGeneration }
 })

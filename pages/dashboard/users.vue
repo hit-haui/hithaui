@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { User } from 'types'
 import { useUsersStore } from '~/stores/users'
 import defaultUserAvatar from '~/assets/images/hit12.jpeg'
+import { CURRENT_GENERATION_NUMBER, GENERATIONS } from '~/constants/generations'
 
 const usersStore = useUsersStore()
+const { filterUsersByGeneration } = usersStore
 const { users } = storeToRefs(usersStore)
 
 onMounted(async () => {
@@ -12,33 +13,43 @@ onMounted(async () => {
 
 const { userTableColumns } = useUsers()
 
-const searchUserInput = ref('')
-const filteredUsers = ref<User[]>()
+const isShowGenerationFilterDropdown = ref(false)
+function showGenerationFilterDropdown() {
+  return isShowGenerationFilterDropdown.value = true
+}
+function hideGenerationFilterDropdown() {
+  return isShowGenerationFilterDropdown.value = false
+}
 
-watch(
-  [searchUserInput, users],
-  () => {
-    if (!searchUserInput.value) {
-      filteredUsers.value = users.value
-    }
-    else {
-      filteredUsers.value = users.value.filter((user) => {
-        return Object.values(user).some((value) => {
-          return String(value)
-            .toLowerCase()
-            .includes(searchUserInput.value.toLowerCase())
-        })
-      })
-    }
-  },
-  {
-    immediate: true,
-  },
-)
+const filterBarRef = ref()
+onClickOutside(filterBarRef, hideGenerationFilterDropdown)
+
+const selectedGeneration = ref(CURRENT_GENERATION_NUMBER)
+const filteredUsers = ref(filterUsersByGeneration(CURRENT_GENERATION_NUMBER))
+watchEffect(() => {
+  filteredUsers.value = filterUsersByGeneration(selectedGeneration.value)
+  hideGenerationFilterDropdown()
+})
+
+const searchUserInput = ref('')
+const usersByGeneration = computed(() => {
+  return users.value.filter(
+    user => user.generation === selectedGeneration.value,
+  )
+})
+watchEffect(() => {
+  filteredUsers.value = usersByGeneration.value.filter((user) => {
+    return Object.values(user).some((value) => {
+      return String(value)
+        .toLowerCase()
+        .includes(searchUserInput.value.toLowerCase())
+    })
+  })
+})
 </script>
 
 <template>
-  <div class="users-management-page">
+  <div class="users-management-page relative">
     <div class="content">
       <div class="header">
         <h2 class="title">
@@ -49,11 +60,39 @@ watch(
         </p>
       </div>
       <div class="toolbar">
-        <div />
-        <div class="search-input">
-          <div
-            class="search-icon"
+        <div ref="filterBarRef" class="filter-bar">
+          <button
+            class="dropdown-button"
+            type="button"
+            @click="showGenerationFilterDropdown"
           >
+            <Icon name="uil:filter" class="icon-left" />
+            HIT {{ selectedGeneration }}
+            <Icon name="uil:angle-down" class="icon-right" />
+          </button>
+          <div
+            v-if="isShowGenerationFilterDropdown"
+            class="dropdown-content"
+          >
+            <ul class="generation-list">
+              <li v-for="generation in GENERATIONS" :key="generation.value" class="item">
+                <input
+                  :id="generation.label"
+                  v-model="selectedGeneration"
+                  type="radio"
+                  :value="generation.value"
+                  class="radio"
+                >
+                <label
+                  :for="generation.label"
+                  class="label"
+                >{{ generation.label }}</label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="search-bar">
+          <div class="search-icon">
             <Icon name="uil:search" class="icon" />
           </div>
           <input
@@ -84,11 +123,7 @@ watch(
         </thead>
         <tbody class="body">
           <template v-if="filteredUsers?.length">
-            <tr
-              v-for="user in filteredUsers"
-              :key="user.id"
-              class="row"
-            >
+            <tr v-for="user in filteredUsers" :key="user.id" class="row">
               <td class="cell-checkbox">
                 <div class="checkbox">
                   <input type="checkbox" class="input">
@@ -182,26 +217,6 @@ watch(
 
   > .content > .header > .description {
     @apply mt-1 text-sm font-normal text-gray-500;
-  }
-
-  > .content > .toolbar {
-    @apply flex items-center justify-between pb-4 bg-white p-4;
-  }
-
-  > .content > .toolbar > .search-input {
-    @apply relative;
-  }
-
-  > .content > .toolbar > .search-input > .search-icon {
-    @apply absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none;
-
-    > .icon {
-      @apply w-4 h-4 text-gray-500;
-    }
-  }
-
-  > .content > .toolbar > .search-input > .input {
-    @apply block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-orange-500 focus:border-orange-500 focus:outline-orange-500;
   }
 
   > .content > .table {
@@ -304,6 +319,59 @@ watch(
     }
     > .content > .showing > .value {
       @apply font-normal text-gray-900;
+    }
+  }
+}
+
+.toolbar {
+  @apply flex items-center justify-between pb-4 bg-white p-4;
+  > .filter-bar {
+      > .dropdown-button {
+        @apply inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5;
+      }
+
+      > .dropdown-button > .icon-left {
+        @apply w-4 h-4 mr-2.5
+      }
+
+      > .dropdown-button > .icon-right {
+        @apply w-4 h-4 ml-2.5
+      }
+
+      > .dropdown-content {
+        @apply absolute z-10 w-48 bg-white divide-y divide-gray-100 rounded-lg shadow h-[140px] overflow-y-scroll mt-2;
+      }
+
+      > .dropdown-content > .generation-list {
+        @apply p-3 space-y-1 text-sm text-gray-700;
+      }
+
+      > .dropdown-content > .generation-list  > .item {
+        @apply flex items-center p-2 rounded hover:bg-gray-100;
+      }
+
+      > .dropdown-content > .generation-list  > .item  > .radio {
+        @apply w-4 h-4 text-amber-500 bg-gray-100 border-gray-300;
+      }
+
+      > .dropdown-content > .generation-list  > .item  > .label {
+        @apply w-full ml-2 text-sm font-medium text-gray-900 rounded;
+      }
+  }
+
+  > .search-bar {
+    @apply relative;
+
+    > .search-icon {
+      @apply absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none;
+
+      > .icon {
+        @apply w-4 h-4 text-gray-500;
+      }
+    }
+
+    > .input {
+      @apply block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-orange-500 focus:border-orange-500 focus:outline-orange-500;
     }
   }
 }
