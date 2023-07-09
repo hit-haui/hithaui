@@ -22,6 +22,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.API_BASE_URL,
+      githubApiBaseUrl: process.env.GITHUB_API_BASE_URL,
+      githubToken: process.env.GITHUB_TOKEN,
     },
   },
 })

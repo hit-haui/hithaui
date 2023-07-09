@@ -49,7 +49,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="users-management-page relative">
+  <div class="users-management-page">
     <div class="content">
       <div class="header">
         <h2 class="title">
