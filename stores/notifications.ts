@@ -1,13 +1,18 @@
-import { Notification } from "~/types"
+import type {CreateNotificationData, Notification } from '~/types/notification'
+
 export const useNotificationStore = defineStore('notification', () => {
     const notifications = ref<Notification[]>([])
 
-    const addNotification = (notification: Notification) => {
-        notifications.value.push(notification)
+    const addNotification = (notification: CreateNotificationData) => {
+        notifications.value.push({
+            id: useUUID(),
+            message: notification.message,
+            type: notification.type || 'success',
+        })
     }
 
-    const removeNotification = (id: string) => {
-        notifications.value = notifications.value.filter((item) => item.id !== id);
+    const removeNotification = (notificationId: string) => {
+        notifications.value = notifications.value.filter(({ id }) => id !== notificationId);
     }
     return { addNotification, removeNotification, notifications }
 })

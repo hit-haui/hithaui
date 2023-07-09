@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/auth'
-<<<<<<< HEAD
-import {useNotificationStore} from '~/stores/nofiStore'
-import {Notification} from '~/types'
-=======
-import HITLogo from '~/assets/images/logoHIT.png'
 import { useNotificationStore } from '~/stores/notifications'
-import { Notification } from '~/types'
->>>>>>> ea4b0d1 (:wrench: Implement AppNotification component)
+
 const isSidebarExpanded = ref(true)
 function handleToggleSidebar() {
   isSidebarExpanded.value = !isSidebarExpanded.value
