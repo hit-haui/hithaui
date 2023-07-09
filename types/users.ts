@@ -8,3 +8,9 @@ export interface User {
   createdAt: Date
   updatedAt?: Date | null
 }
+
+export interface Contributor {
+  name: string
+  avatar: string
+  github: string
+}
