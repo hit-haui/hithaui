@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useNotificationStore } from '~/stores/nofiStore';
-import { onMounted, onUnmounted, defineAsyncComponent } from 'vue';
+import { useNotificationStore } from '~/stores/notifications';
+import { onMounted, onUnmounted } from 'vue';
 const props = withDefaults(
     defineProps<{
         id: string
@@ -15,19 +15,20 @@ const variant = computed(() => {
     return `-${props.type}`
 })
 const notificationStore = useNotificationStore()
-const handleRemoveNoti = () => {
+const handleRemoveNotification = () => {
     notificationStore.removeNotification(props.id)
 }
 
+const timerId = ref()
 
 onMounted(() => {
-    setTimeout(() => {
-        handleRemoveNoti();
+    timerId.value = setTimeout(() => {
+        handleRemoveNotification();
     }, 3000);
 });
 
 onUnmounted(() => {
-    clearTimeout();
+    clearTimeout(timerId.value);
 });
 
 </script>
@@ -35,7 +36,7 @@ onUnmounted(() => {
     <div class="hit-noti">
         <div class="notification " :class="variant">
             <p>{{ message }}</p>
-            <Icon class="icon-close" @click="handleRemoveNoti" name="ion:close"></Icon>
+            <Icon class="icon-close" @click="handleRemoveNotification" name="ion:close"></Icon>
         </div>
     </div>
 </template>
@@ -49,6 +50,7 @@ onUnmounted(() => {
     right: 0%;
     position: relative;
 }
+
 .notification {
     display: flex;
     width: 350px;
@@ -66,16 +68,19 @@ onUnmounted(() => {
     animation-fill-mode: forwards;
     z-index: 100;
     margin-bottom: 6px;
-    
+
 }
+
 @keyframes slide-in {
-  from {
-    left: 72%;
-  }
-  to {
-    left: 70%;
-  }
+    from {
+        left: 72%;
+    }
+
+    to {
+        left: 70%;
+    }
 }
+
 .notification.-success {
     background-color: green;
     color: white;
