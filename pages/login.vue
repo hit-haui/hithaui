@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/auth'
 import hit12Logo from '~/assets/images/hit12.jpeg'
+import { useNotificationStore } from 'stores/notifications';
 
 definePageMeta({
   layout: 'blank',
@@ -20,7 +21,6 @@ const isInvalidLoginForm = computed(
 async function handleLogin() {
   if (isInvalidLoginForm.value)
     return
-
   await authStore.login(userCredentials)
 }
 </script>

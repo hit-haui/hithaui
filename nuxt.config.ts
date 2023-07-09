@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: ['nuxt-icon', '@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt'],
   css: ['~/assets/scss/main.scss'],
   vite: {

@@ -6,19 +6,13 @@ const { notifications } = storeToRefs(notificationStore)
 
 <template>
     <div class="notification-container">
-        <AppNotification 
-            v-for="notification in notifications" 
-            :key="notification.id" 
-            class="notification"
-            :notification="notification" 
-        />
+        <AppNotification v-for="notification in notifications" :key="notification.id" class="notification"
+            :notification="notification" />
     </div>
 </template>
 
 <style lang="scss" scoped>
 .notification-container {
-    position: fixed;
-    top: 0;
-    right: 0;
+    @apply fixed top-0 right-0 mr-[32px] mt-[80px] z-10
 }
 </style>

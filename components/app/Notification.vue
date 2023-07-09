@@ -1,30 +1,27 @@
 <script setup lang="ts">
+import type { Notification } from 'types/notification';
 import { useNotificationStore } from '~/stores/notifications';
+import { NOTIFICATION_ICON, NOTIFICATION_TIMEOUT } from '~/constants/notification'
 import { onMounted, onUnmounted } from 'vue';
-const props = withDefaults(
-    defineProps<{
-        id: string
-        message: string
-        type?: "success" | "error"
-    }>(),
-    {
-        type: 'success',
-    }
-)
-const variant = computed(() => {
-    return `-${props.type}`
+
+const props = defineProps<{
+    notification: Notification
+}>()
+
+const notificationType = computed(() => {
+    return `-${props.notification.type}`
 })
+
 const notificationStore = useNotificationStore()
-const handleRemoveNotification = () => {
-    notificationStore.removeNotification(props.id)
-}
+
+const { removeNotification } = notificationStore
 
 const timerId = ref()
 
 onMounted(() => {
     timerId.value = setTimeout(() => {
-        handleRemoveNotification();
-    }, 3000);
+        removeNotification(props.notification.id)
+    }, NOTIFICATION_TIMEOUT);
 });
 
 onUnmounted(() => {
@@ -33,64 +30,51 @@ onUnmounted(() => {
 
 </script>
 <template>
-    <div class="hit-noti">
-        <div class="notification " :class="variant">
-            <p>{{ message }}</p>
-            <Icon class="icon-close" @click="handleRemoveNotification" name="ion:close"></Icon>
+    <div class="toast-container" role="alert">
+        <div class="icon" :class="notificationType">
+            <Icon :name="NOTIFICATION_ICON[notification.type]" size="20" />
         </div>
+        <div class="message">
+            {{ notification.message }}
+        </div>
+        <button type="button" class="button-close" @click="removeNotification(notification.id)">
+            <span class="sr-only">Close</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd" />
+            </svg>
+        </button>
     </div>
 </template>
 
 <style scoped>
-.hit-noti {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 10px;
-    top: 0%;
-    right: 0%;
-    position: relative;
-}
+.toast-container {
+  @apply flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow shadow-md  ;
 
-.notification {
-    display: flex;
-    width: 350px;
-    height: 50px;
-    justify-content: space-between;
-    padding: 0 10px;
-    align-items: center;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    position: relative;
-    background-color: #fff;
-    animation-name: slide-in;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    z-index: 100;
-    margin-bottom: 6px;
+  > .icon {
+    @apply inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-l
+  }
 
-}
+  > .icon.-success {
+    @apply text-green-400 bg-green-100
+  }
 
-@keyframes slide-in {
-    from {
-        left: 72%;
-    }
+  > .icon.-error {
+    @apply text-red-500 bg-red-100
+  }
 
-    to {
-        left: 70%;
-    }
-}
+  > .icon.-warning {
+    @apply text-orange-500 bg-orange-100
+  }
 
-.notification.-success {
-    background-color: green;
-    color: white;
-}
+  > .message {
+    @apply ml-3 text-sm font-normal
+  }
 
-.notification.-error {
-    background-color: red;
-}
-
-.icon-close {
-    cursor: pointer;
+  > .button-close {
+    @apply ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8
+  }
 }
 </style>
