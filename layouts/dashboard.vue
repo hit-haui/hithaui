@@ -2,7 +2,7 @@
 import { useAuthStore } from '~/stores/auth'
 import HITLogo from '~/assets/images/logoHIT.png'
 import { useNotificationStore } from '~/stores/notifications'
-import { Notification } from '~/types'
+
 const isSidebarExpanded = ref(true)
 function handleToggleSidebar() {
   isSidebarExpanded.value = !isSidebarExpanded.value

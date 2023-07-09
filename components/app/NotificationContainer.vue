@@ -6,8 +6,12 @@ const { notifications } = storeToRefs(notificationStore)
 
 <template>
     <div class="notification-container">
-        <AppNotification v-for="notification in notifications" :key="notification.id" class="notification"
-            :notification="notification" />
+        <AppNotification 
+            v-for="notification in notifications" 
+            :key="notification.id" 
+            class="notification"
+            :notification="notification" 
+        />
     </div>
 </template>
 
