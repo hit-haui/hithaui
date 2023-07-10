@@ -2,6 +2,7 @@ import type { LoginResponse, User, UserCredentials } from '~/types'
 
 export const useAuthStore = defineStore('auth', () => {
   const { $api } = useNuxtApp()
+
   const user = ref<User>()
   const accessToken = useLocalStorage('accessToken', '')
 
@@ -13,6 +14,9 @@ export const useAuthStore = defineStore('auth', () => {
 
     if (response) {
       accessToken.value = response.accessToken
+      useNotification({
+        message: 'Welcome to HIT CLUB!',
+      })
       return navigateTo('/dashboard')
     }
   }
