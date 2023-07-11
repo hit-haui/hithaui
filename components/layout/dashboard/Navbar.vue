@@ -1,7 +1,14 @@
 <script setup lang="ts">
+import type { User } from 'types'
+import { useAuthStore } from '~/stores/auth'
+import hit12Avatar from '~/assets/images/hit12.jpeg'
+
 defineProps<{
-  user: any
+  user: User
 }>()
+
+const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
 
 const isShowUserDropdown = ref(false)
 const openUserDropdown = () => (isShowUserDropdown.value = true)
@@ -15,20 +22,22 @@ onClickOutside(userCardRef, closeUserDropdown)
   <nav class="navbar">
     <div class="content-wrapper">
       <div class="brand">
-        <a href="https://hithaui.com" class="app-info">
+        <NuxtLink href="https://hithaui.com" class="app-info">
           <img
             src="~/assets/images/logoHIT.png"
             class="logo"
             alt="HIT CLUB Logo"
           >
-          <h1 class="title text-4xl">HIT CLUB</h1>
-        </a>
+        </NuxtLink>
+        <h1 class="title">
+          HIT CLUB
+        </h1>
       </div>
       <div ref="userCardRef" class="user-card relative">
         <button type="button" class="avatar-button" @click="openUserDropdown">
           <img
             class="w-10 h-10 rounded-full"
-            src="~/assets/images/hit12.jpeg"
+            :src="user?.avatar || hit12Avatar"
             alt="user photo"
           >
         </button>
@@ -68,15 +77,13 @@ onClickOutside(userCardRef, closeUserDropdown)
     }
 
     > .brand > .app-info {
-      @apply flex justify-center items-center ml-2 md:mr-24;
+      > .logo {
+        @apply h-12 mr-3 ml-2;
+      }
     }
 
-    > .brand > .app-info > .logo {
-      @apply h-8 mr-3;
-    }
-
-    > .brand > .app-info > .title {
-      @apply self-center text-xl font-extrabold sm:text-2xl whitespace-nowrap text-amber-500;
+    > .brand > .title {
+      @apply self-center text-3xl font-extrabold whitespace-nowrap text-orange-500;
     }
 
     > .user-card > .body > .avatar-button {
