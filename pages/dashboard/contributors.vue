@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { useContributorsStore } from '~/stores/contributors'
 
-definePageMeta({
-  middleware: 'auth',
-  layout: 'dashboard',
-})
-
 const contributorsStore = useContributorsStore()
 const { contributors } = storeToRefs(contributorsStore)
 await contributorsStore.fetchContributors()
