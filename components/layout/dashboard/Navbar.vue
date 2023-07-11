@@ -39,6 +39,11 @@ onClickOutside(userCardRef, closeUserDropdown)
           </div>
           <ul class="menu">
             <li class="menu-item">
+              <NuxtLink to="/dashboard/profile" class="profile" @click="closeUserDropdown">
+                Profile
+              </NuxtLink>
+            </li>
+            <li class="menu-item">
               <NuxtLink to="/login" class="sign-out" @click="$emit('logout')">
                 Sign out
               </NuxtLink>
@@ -94,7 +99,7 @@ onClickOutside(userCardRef, closeUserDropdown)
       @apply text-sm font-medium text-gray-900 truncate;
     }
 
-    > .user-card > .dropdown-user > .menu > .menu-item > .sign-out {
+    > .user-card > .dropdown-user > .menu > .menu-item > * {
       @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100;
     }
   }
