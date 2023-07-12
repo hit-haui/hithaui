@@ -1,9 +1,10 @@
 import { useAuthStore } from '~/stores/auth'
-import type { User } from '~/types'
+import type { User, UserGeneralInfoForm } from '~/types'
 
 export const useUsersStore = defineStore('users', () => {
   const { $api } = useNuxtApp()
   const users = ref<User[]>([])
+  const user = ref<User | null>(null)
 
   const authStore = useAuthStore()
   const { accessToken } = storeToRefs(authStore)
@@ -18,11 +19,24 @@ export const useUsersStore = defineStore('users', () => {
     users.value = response
   }
 
-  const filterUsersByGeneration = (generation: number) => {
-    return users.value.filter(
-      user => user.generation === generation,
-    )
+  const updateUser = async (
+    userId: number,
+    updateUserDto: UserGeneralInfoForm,
+  ) => {
+    const response = await $api<User>(`/api/v1/users/${userId}`, {
+      method: 'PUT',
+      body: updateUserDto,
+      headers: {
+        Authorization: `Bearer ${accessToken.value}`,
+      },
+    })
+
+    user.value = response
   }
 
-  return { users, fetchUsers, filterUsersByGeneration }
+  const filterUsersByGeneration = (generation: number) => {
+    return users.value.filter(user => user.generation === generation)
+  }
+
+  return { users, fetchUsers, updateUser, filterUsersByGeneration, user }
 })

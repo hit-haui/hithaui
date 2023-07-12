@@ -16,7 +16,7 @@ const { user } = storeToRefs(authStore)
       <ProfileUserAvatar class="user-avatar" :avatar="user?.avatar" />
       <ProfileUserSocialList class="social-list" />
     </div>
-    <ProfileUserGeneralInfo class="general-info" />
+    <ProfileUserGeneralInfo v-if="user" class="general-info" />
   </div>
 </template>
 
@@ -42,7 +42,7 @@ const { user } = storeToRefs(authStore)
   }
 
   > .general-info {
-    @apply col-span-2 p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 sm:p-6;
+    @apply col-span-2 p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 sm:p-6 relative;
   }
 }
 </style>
