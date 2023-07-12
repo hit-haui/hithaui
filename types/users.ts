@@ -21,6 +21,7 @@ export interface Contributor {
   name: string
   avatar: string
   github: string
+  commits: number
 }
 
 export type UserGeneralInfoForm = Partial<
