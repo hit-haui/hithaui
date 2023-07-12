@@ -133,7 +133,7 @@ const devRoutes = computed(() => [
   }
 
   > .content > .menu > .menu-item > .link > .icon {
-    @apply w-5 h-5 transition duration-75 text-orange-500;
+    @apply w-5 h-5 transition duration-75 text-primary-500;
   }
 
   > .content > .menu > .menu-item > .link > .target {
@@ -145,7 +145,7 @@ const devRoutes = computed(() => [
   }
 
   > .settings > .item {
-    @apply inline-flex justify-center p-2 rounded text-orange-500 cursor-pointer hover:bg-gray-100
+    @apply inline-flex justify-center p-2 rounded text-primary-500 cursor-pointer hover:bg-gray-100
   }
 
   > .settings > .item > .icon {

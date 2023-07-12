@@ -13,7 +13,7 @@ const props = withDefaults(
   {
     label: '',
     variant: 'solid',
-    color: 'orange',
+    color: 'primary',
     size: 'md',
     disabled: false,
     loading: false,

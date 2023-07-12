@@ -70,15 +70,15 @@ async function handleLogin() {
   }
 
   > .form > .form-item > .input {
-    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:outline-amber-500
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:outline-primary-500
   }
 
   > .form > .form-item > .login-button {
-    @apply text-white bg-amber-500 hover:bg-amber-600 focus:ring-4 focus:outline-none focus:ring-amber-100 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center
+    @apply text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center
   }
 
   .form > .title {
-    @apply text-amber-500 text-5xl font-bold text-center;
+    @apply text-primary-500 text-5xl font-bold text-center;
   }
 }
 </style>

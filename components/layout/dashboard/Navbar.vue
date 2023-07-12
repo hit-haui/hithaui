@@ -83,7 +83,7 @@ onClickOutside(userCardRef, closeUserDropdown)
     }
 
     > .brand > .title {
-      @apply self-center text-3xl font-extrabold whitespace-nowrap text-orange-500;
+      @apply self-center text-3xl font-extrabold whitespace-nowrap text-primary-500;
     }
 
     > .user-card > .body > .avatar-button {

@@ -224,7 +224,7 @@ async function updateUserGeneralInfo() {
     @apply absolute top-2 right-2 p-4;
 
     > .edit {
-      @apply cursor-pointer text-orange-500 w-5 h-5;
+      @apply cursor-pointer text-primary-500 w-5 h-5;
     }
   }
 
@@ -249,19 +249,19 @@ async function updateUserGeneralInfo() {
       @apply block mb-2 text-sm font-medium text-gray-900;
     }
     > .fieldset > .form-item > .input {
-      @apply shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 focus:outline-amber-500 block w-full p-2.5;
+      @apply shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 focus:outline-primary-500 block w-full p-2.5;
     }
 
     > .fieldset > .form-item > .textarea {
-      @apply block px-2.5 py-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:outline-amber-500;
+      @apply block px-2.5 py-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 focus:outline-primary-500;
     }
 
     > .fieldset > .form-item > .save-button {
-      @apply bg-orange-500 hover:bg-orange-600 text-white focus:ring-4 focus:ring-blue-300 px-3 py-2 text-xs font-medium rounded-lg text-center;
+      @apply bg-primary-500 hover:bg-primary-600 text-white focus:ring-4 focus:ring-blue-300 px-3 py-2 text-xs font-medium rounded-lg text-center;
     }
 
     > .fieldset > .form-item > .save-button.-disabled {
-      @apply cursor-not-allowed bg-orange-300
+      @apply cursor-not-allowed bg-primary-300
     }
 
     > .fieldset > .form-item > .cancel-button {

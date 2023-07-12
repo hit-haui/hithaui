@@ -79,7 +79,7 @@ onUnmounted(() => {
   }
 
   > .icon.-warning {
-    @apply text-orange-500 bg-orange-100;
+    @apply text-primary-500 bg-primary-100;
   }
 
   > .message {
