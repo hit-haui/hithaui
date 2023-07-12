@@ -163,7 +163,7 @@ watchEffect(() => {
                 <Icon
                   size="15"
                   name="uil:edit"
-                  class="text-amber-500 cursor-pointer"
+                  class="text-primary-500 cursor-pointer"
                 />
                 |
                 <Icon
@@ -351,7 +351,7 @@ watchEffect(() => {
       }
 
       > .dropdown-content > .generation-list  > .item  > .radio {
-        @apply w-4 h-4 text-amber-500 bg-gray-100 border-gray-300;
+        @apply w-4 h-4 text-primary-500 bg-gray-100 border-gray-300;
       }
 
       > .dropdown-content > .generation-list  > .item  > .label {
@@ -371,7 +371,7 @@ watchEffect(() => {
     }
 
     > .input {
-      @apply block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-orange-500 focus:border-orange-500 focus:outline-orange-500;
+      @apply block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-primary-500 focus:border-primary-500 focus:outline-primary-500;
     }
   }
 }

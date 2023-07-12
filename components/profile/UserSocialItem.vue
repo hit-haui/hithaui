@@ -81,7 +81,7 @@ defineProps<{
     }
 
     > .connect {
-      @apply flex items-center gap-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-orange-500 hover:bg-orange-600;
+      @apply flex items-center gap-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-500 hover:bg-primary-600;
     }
   }
 }

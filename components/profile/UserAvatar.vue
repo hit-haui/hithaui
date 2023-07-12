@@ -53,11 +53,11 @@ defineProps<{
     }
 
     > .card > .actions > .upload {
-      @apply inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-orange-500 hover:bg-orange-600;
+      @apply inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-500 hover:bg-primary-600;
     }
 
     > .card > .actions > .delete {
-      @apply py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-orange-500 focus:z-10;
+      @apply py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-500 focus:z-10;
     }
   }
 }
