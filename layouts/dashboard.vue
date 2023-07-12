@@ -18,7 +18,9 @@ function handleLogout() {
     <LayoutDashboardSidebar />
     <main class="main-content">
       <div class="slot-content">
-        <slot />
+        <div class="content">
+          <slot />
+        </div>
       </div>
     </main>
   </div>
@@ -28,6 +30,14 @@ function handleLogout() {
 .dashboard-layout {
   > .main-content {
     @apply p-4 sm:ml-64;
+
+    > .slot-content {
+      @apply p-4 mt-14 rounded-lg;
+    }
+
+    > .slot-content > .content {
+      @apply overflow-x-auto shadow-md sm:rounded-lg;
+    }
   }
 }
 </style>
