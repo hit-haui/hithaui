@@ -1,4 +1,8 @@
 <script setup lang="ts">
+const emit = defineEmits<{
+  (e: 'open-course-drawer'): void
+}>()
+
 const isOpenSpeedDial = ref(false)
 const showSpeedDial = () => (isOpenSpeedDial.value = true)
 const hideSpeedDial = () => (isOpenSpeedDial.value = false)
@@ -23,7 +27,7 @@ const hideSpeedDial = () => (isOpenSpeedDial.value = false)
         <Icon name="uil:download-alt" class="icon" />
         <span class="label">Save</span>
       </button>
-      <button type="button" class="action-item">
+      <button type="button" class="action-item" @click="emit('open-course-drawer')">
         <Icon name="uil:plus" class="icon" />
         <span class="label">New</span>
       </button>
