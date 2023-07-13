@@ -9,7 +9,9 @@
         Ours Courses
       </h2>
     </header>
-    <div class="toolbar" />
+    <div class="speed-dial">
+      <CoursesSpeedDial />
+    </div>
     <div class="courses" />
     <div class="footer" />
   </div>
